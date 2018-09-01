@@ -13,7 +13,6 @@ class UserModel:
             'username' : username,
             'password' : password,
             'friends' : [],
-            'likes' :[]
         }
         self.db.users.insert_one(register_user_data)
 

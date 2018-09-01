@@ -4,15 +4,28 @@
 
 
 {% block content %}
-<div class="col-md-offset-4 col-md-4">
+<div class="col-md-offset-2 col-md-6">
     <h2> Posts </h2>
     <ul class="list-group">
         {% if posts %}
             {% for post in posts %}
                 <li class="list-group-item">
-                    {{post.title}} - Created by {{post.username}} {%if post.username == session['username'] %} Edit Delete {% endif%}<br>
+                   <h4 style="display:inline"> {{post.title}} </h4>- Created by {{post.username}} 
+                    {%if post.username == session['username'] %} 
+                        <a href="{{url_for('edit_post', post_id=post._id)}}">Edit</a>
+                        <a href="{{url_for('delete_post', post_id=post._id)}}">Delete</a>
+                    {% endif%}
+                   <br>
                     {{post.content}} <br>
-                    3 Likes <a href="#">Like</a>
+                    {% if post.likes|length == 1 %}
+                        1 Like
+                    {% else %}
+                        {{post.likes|length}} Likes 
+                    {% endif %}
+                    
+                    {% if post.can_like %}
+                    <a href="{{url_for('like_post', post_id=post._id)}}">Like</a>
+                    {% endif %}
                 </li>
             {% endfor %}
         {% else %}
