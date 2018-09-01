@@ -1,4 +1,8 @@
-from app import app
+# Set the path
+import os, sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from facebook_app import app
 
 if __name__ == '__main__':
     app.debug = True
