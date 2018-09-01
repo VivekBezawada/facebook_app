@@ -10,7 +10,7 @@
         {% if friends %}
             {% for friend in friends %}
                 <li class="list-group-item">
-                    {{frind}}
+                    {{friend}}
                 </li>
             {% endfor %}
         {% else %}
@@ -26,7 +26,9 @@
                 {% for user in users %}
                     <li class="list-group-item">
                         {{user.name}}
-                        <a href="#">Add Friend</a>
+                        {% if not user.is_friend %}
+                        <a href="{{url_for('add_friend', friend_name=user.name)}}">Add Friend</a>
+                        {% endif %}
                     </li>
                 {% endfor %}
             {% else %}

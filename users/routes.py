@@ -51,4 +51,21 @@ def friends():
     username = session['username']
     friends = user_model.get_friends_by_username(username)
     users = user_model.get_all_users_except_me(username)
-    return render_template('users/friends.html', friends = friends, users = users)
+    updated_users_list = []
+    for user in users:
+        is_friend = False
+        for friend in friends:
+            if friend == user['name']:
+                is_friend = True
+        user['is_friend'] = is_friend
+        updated_users_list.append(user)
+
+    return render_template('users/friends.html', friends = friends, users = updated_users_list)
+
+@app.route('/add_friend/<friend_name>')
+@is_login
+def add_friend(friend_name):
+    username = session['username']
+    user_model.add_friend_by_username(username,friend_name)
+    return redirect(url_for('friends'))
+

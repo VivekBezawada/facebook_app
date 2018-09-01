@@ -54,3 +54,15 @@ class UserModel:
         if cursor.count() == 0:
             return None
         return cursor
+
+    def add_friend_by_username(self,username,friend_name):
+        query = {
+            'username' : username
+        }
+        cursor = self.db.users.find(query)
+
+        user_data = cursor[0] if cursor.count() > 0 else None
+        if user_data is None:
+            return False
+        user_data['friends'].append(friend_name)
+        self.db.users.update_one(query,{'$set':user_data})
