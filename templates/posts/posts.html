@@ -7,13 +7,17 @@
 <div class="col-md-offset-4 col-md-4">
     <h2> Posts </h2>
     <ul class="list-group">
-        {% for post in posts %}
-            <li class="list-group-item">
-                {{post.title}} - Created by {{post.username}} {%if post.username == session['username'] %} Edit Delete {% endif%}<br>
-                {{post.content}} <br>
-                3 Likes <a href="#">Like</a>
-            </li>
-        {% endfor %}
+        {% if posts %}
+            {% for post in posts %}
+                <li class="list-group-item">
+                    {{post.title}} - Created by {{post.username}} {%if post.username == session['username'] %} Edit Delete {% endif%}<br>
+                    {{post.content}} <br>
+                    3 Likes <a href="#">Like</a>
+                </li>
+            {% endfor %}
+        {% else %}
+                There are no posts
+        {% endif %}
     </ul>
 </div>
 {% endblock %}

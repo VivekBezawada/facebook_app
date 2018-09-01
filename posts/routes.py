@@ -9,7 +9,6 @@ post_model = PostModel()
 @is_login
 def posts():
     posts = post_model.get_all_posts()
-    print(posts)
     return render_template('posts/posts.html', posts = posts)
 
 @app.route('/posts/create',methods=['GET','POST'])
