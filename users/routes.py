@@ -1,6 +1,7 @@
 from facebook_app import app
 from flask import render_template,request,jsonify,redirect,url_for,session
 from facebook_app.models.User import UserModel
+from users.decorators import is_login
 
 user_model = UserModel()
 
@@ -39,6 +40,15 @@ def register():
     return render_template('users/register.html')
 
 @app.route('/logout')
+@is_login
 def logout():
     session.pop('username')
     return redirect(url_for('login'))
+
+@app.route('/friends')
+@is_login
+def friends():
+    username = session['username']
+    friends = user_model.get_friends_by_username(username)
+    users = user_model.get_all_users_except_me(username)
+    return render_template('users/friends.html', friends = friends, users = users)

@@ -35,7 +35,9 @@
           <ul class="nav navbar-nav navbar-right">
             {% if session['username'] %}
               <li><a href="{{url_for('index')}}">Home</a></li>
+              <li><a href="{{url_for('create_post')}}">Create Post</a></li>
               <li><a href="{{url_for('posts')}}">Posts</a></li>
+              <li><a href="{{url_for('friends')}}">Friends</a></li>
               <li><a href="{{url_for('logout')}}">Logout</a></li>
             {% else %}
               <li><a href="{{url_for('index')}}">Home</a></li>

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Friends - Facebook App{% endblock %}
+
+
+{% block content %}
+<div class="col-md-offset-2 col-md-4">
+    <h2> Your Friends </h2>
+    <ul class="list-group">
+        {% if friends %}
+            {% for friend in friends %}
+                <li class="list-group-item">
+                    {{frind}}
+                </li>
+            {% endfor %}
+        {% else %}
+                There are no friends
+        {% endif %}
+    </ul>
+</div>
+
+<div class="col-md-4">
+        <h2> List of users </h2>
+        <ul class="list-group">
+            {% if users %}
+                {% for user in users %}
+                    <li class="list-group-item">
+                        {{user.name}}
+                        <a href="#">Add Friend</a>
+                    </li>
+                {% endfor %}
+            {% else %}
+                    There are no users
+            {% endif %}
+        </ul>
+</div>
+{% endblock %}

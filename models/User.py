@@ -37,3 +37,20 @@ class UserModel:
         else:
             return True
 
+    def get_friends_by_username(self,username):
+        query = {
+            'username' : username
+        }
+        cursor = self.db.users.find(query)
+        if cursor.count() == 0:
+            return None
+        for user in cursor:
+            return user['friends']
+    def get_all_users_except_me(self,username):
+        query = {
+            'username' : {'$ne' : username}
+        }
+        cursor = self.db.users.find(query)
+        if cursor.count() == 0:
+            return None
+        return cursor
